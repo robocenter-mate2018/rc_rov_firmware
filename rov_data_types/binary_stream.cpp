@@ -19,6 +19,9 @@ namespace rov_types {
 			m_data[i] = byte_array[i];
 			m_len = len;
 		}
+		unsigned short x = 1; /* 0x0001 */
+		m_system_type = (*((unsigned char *)&x) == 0) ? byte_ordering::big_endian : byte_ordering::little_endian;
+		m_ordering = byte_ordering::big_endian;
 	}
 
     binary_stream::~binary_stream() {

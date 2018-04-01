@@ -22,7 +22,7 @@ namespace rov_types {
 
         void serialize(uint8_t *data, size_t *len);
 
-        error_code deserialize(const uint8_t *input, size_t *len);
+        error_code deserialize(const uint8_t *input, size_t len);
     };
 
     struct rov_control : serializable {
@@ -39,7 +39,7 @@ namespace rov_types {
 
         void serialize(uint8_t *data, size_t *len);
 
-        error_code deserialize(const uint8_t *input, size_t *len);
+        error_code deserialize(const uint8_t *input, size_t len);
     };
 
 
@@ -55,7 +55,7 @@ namespace rov_types {
 
 		virtual void serialize(uint8_t *data, size_t *len);
 
-		virtual error_code deserialize(const uint8_t *input, size_t *len);
+		virtual error_code deserialize(const uint8_t *input, size_t len);
     };
 };
 

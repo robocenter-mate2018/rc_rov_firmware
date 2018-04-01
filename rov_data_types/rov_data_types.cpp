@@ -16,11 +16,11 @@ void  rov_types::rov_telimetry::serialize(uint8_t *data, size_t *len) {
 	bs.data(data, len);
 }
 
-rov_types::serializable::error_code rov_types::rov_telimetry::deserialize(const uint8_t *input, size_t *len) {
-    binary_stream bs(input, *len);
+rov_types::serializable::error_code rov_types::rov_telimetry::deserialize(const uint8_t *input, size_t len) {
+    binary_stream bs(input, len);
     uint8_t packet_id;
 
-    if (*len < meta::packet_size){
+    if (len < meta::packet_size){
         return error_code::size_less;
     }
 
@@ -39,7 +39,7 @@ rov_types::serializable::error_code rov_types::rov_telimetry::deserialize(const 
         return error_code::crc_mismatch;
     }
 
-    if (*len > meta::packet_size){
+    if (len > meta::packet_size){
         return error_code::success_size_greater;
     }
 
@@ -57,11 +57,11 @@ void rov_types::rov_control::serialize(uint8_t *data, size_t *len) {
     bs.data(data, len);
 }
 
-rov_types::serializable::error_code rov_types::rov_control::deserialize(const uint8_t *input, size_t *len) {
-    binary_stream bs(input, *len);
+rov_types::serializable::error_code rov_types::rov_control::deserialize(const uint8_t *input, size_t len) {
+    binary_stream bs(input, len);
     uint8_t packet_id;
 
-    if (*len < meta::packet_size){
+    if (len < meta::packet_size){
         return error_code::size_less;
     }
 
@@ -82,7 +82,7 @@ rov_types::serializable::error_code rov_types::rov_control::deserialize(const ui
         return error_code::crc_mismatch;
     }
 
-    if (*len > meta::packet_size){
+    if (len > meta::packet_size){
         return error_code::success_size_greater;
     }
 
@@ -93,24 +93,29 @@ void rov_types::rov_hardware_control::serialize(uint8_t *data, size_t *len) {
     binary_stream bs;
     bs << meta::packet_id;
 
+	Serial.println();
+
     for(auto & p : horizontal_power) {
         bs << p;
     }
     for(auto & p : vertical_power) {
         bs << p;
     }
+	bs << crc::calculateCRC(data, meta::payload_size);
     bs.data(data, len);
+	Serial.println((int)data[0]);
 }
 
-rov_types::serializable::error_code rov_types::rov_hardware_control::deserialize(const uint8_t *input, size_t *len) {
-    binary_stream bs(input, *len);
+rov_types::serializable::error_code rov_types::rov_hardware_control::deserialize(const uint8_t *input, size_t len) {
+    binary_stream bs(input, len);
     uint8_t packet_id;
 
-    if (*len < meta::packet_size){
+    if (len < meta::packet_size){
         return error_code::size_less;
     }
 
     bs >> packet_id;
+	
     if (packet_id != meta::packet_id) {
         return error_code::wrong_id;
     }
@@ -124,12 +129,16 @@ rov_types::serializable::error_code rov_types::rov_hardware_control::deserialize
 
     int16_t current_crc = 0;
     bs >> current_crc;
+	
+	Serial.print((int)current_crc);
+	Serial.print(" ");
+	Serial.print((int)crc::calculateCRC(input, meta::payload_size));
 
     if (current_crc != crc::calculateCRC(input, meta::payload_size)) {
         return error_code::crc_mismatch;
     }
 
-    if (*len > meta::packet_size){
+    if (len > meta::packet_size){
         return error_code::success_size_greater;
     }
 

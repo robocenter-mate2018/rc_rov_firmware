@@ -66,9 +66,9 @@ namespace rov_types {
         template<typename T>
         inline void read(T &data) {
             memcpy((void *) (&data), (void *) (&m_data[m_counter]), sizeof(T));
-            if (m_ordering != m_system_type) {
-                data = swap_endian(data);
-            }
+			if (m_ordering != m_system_type) {
+				data = swap_endian(data);
+			}
             m_counter += sizeof(T);
 			m_len += sizeof(T);
         }
@@ -88,7 +88,7 @@ namespace rov_types {
 
             source.u = loc;
             for (auto &b : source.u8) {
-                m_data[m_len++];
+                m_data[m_len++] = b;
             }
         }
     };

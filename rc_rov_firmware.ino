@@ -5,7 +5,7 @@
 */
 
 // the setup function runs once when you press reset or power the board
-#include "rov_data_types\rov_data_types.hpp"
+#include "rov_data_types/rov_data_types.hpp"
 #include "motor.h"
 rov_types::rov_hardware_control hc;
 
@@ -14,7 +14,6 @@ motor h[4];
 
 void setup() {
 	Serial.begin(115200);
-
 
 	h[0].set(2); h[0].init();
 	h[1].set(2); h[1].init();
@@ -31,6 +30,7 @@ void setup() {
 bool updated = false;
 // the loop function runs over and over again until power down or reset
 void loop() {
+
 	if (updated) {
 		for (int i = 0; i < 4; i++) {
 			v[i].write(hc.vertical_power[i]);
@@ -38,15 +38,18 @@ void loop() {
 		}
 		updated = false;
 	}
-  
+	
 }
 
 void serialEvent() {
 	uint8_t packet[255];
 	size_t i = 0;
+	delay(1);
 	while (Serial.available()) {
 		packet[i++] = Serial.read();
 	}
-	hc.deserialize(packet, &i);
+	auto e = hc.deserialize(packet, i);
+	//Serial.println(i);
+	Serial.write(rov_types::serializable::error_to_string(e).c_str());
 	updated = true;
 }
