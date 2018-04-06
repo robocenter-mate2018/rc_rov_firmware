@@ -1,41 +1,34 @@
-#include "ManipulatorPayload.h"
-#include "RovDataStore.h"
-#include "RovMagics.h"
+#include "manipulator.hpp"
 
-namespace rov {
-
-ManipulatorPayload::ManipulatorPayload() :
-		m_axisX(ManipulatorConfig::AXISX_PIN1, ManipulatorConfig::AXISX_PIN2),
-		m_axisY(ManipulatorConfig::AXISY_PIN1, ManipulatorConfig::AXISY_PIN2),
-		m_valX(0), m_valY(0)
-	{
-
+rov::manipulator::manipulator():
+	m_axisX(24,23), m_axisY(43,34), m_valX(0), m_valY(0)
+{
 }
 
-void ManipulatorPayload::init() {
-
-		m_axisX.init();
-		m_axisY.init();
+void rov::manipulator::init()
+{
+	m_axisX.init();
+	m_axisY.init();
 }
 
-void ManipulatorPayload::update(const RovDataStore & store_) {
-
-		int valX = store_.getControl().manipulatorOpenClose;
-		int valY = store_.getControl().manipulatorRotation;
-		
-		m_axisX.setPower(valX);
-		m_axisY.setPower(valY);
+void rov::manipulator::write(const rov_types::rov_hardware_control & control)
+{
+	rotate(control.manipulator_rotate);
+	rotate(control.manipulator_open_close);
 }
 
-void ManipulatorPayload::commit(RovDataStore & store_) {
-
-		store_.getTelimetry().manipulatorAngle = m_valY;
-		store_.getTelimetry().manipulatorState = m_valX;
+rov::manipulator::~manipulator()
+{
 }
 
-ManipulatorPayload::~ManipulatorPayload(){
-
+void rov::manipulator::rotate(int8_t power)
+{
+	m_valX = power;
+	m_axisX.write(power);
 }
 
-
-} // namespace rov
+void rov::manipulator::open_close(int8_t power)
+{
+	m_valY = power;
+	m_axisY.write(power);
+}

@@ -2,10 +2,9 @@
 #define ROV_MANIPULATORPAYLOAD_H
 
 
-#include "PayloadTool.h"
-#include "Motor.h"
 #include <stdint.h>
-#include "RovDataStore.h"
+#include "rov_data_types.hpp"
+#include "step_motor.h"
 
 namespace rov {
 
@@ -15,17 +14,18 @@ class manipulator {
 
     virtual void init();
 
-    virtual void set(const RovDataStore & store_);
-
-    virtual void commit(RovDataStore & store_);
+    virtual void write(const  rov_types::rov_hardware_control& control);
 
     ~manipulator();
 
 
   private:
-    Motor m_axisX;
+	void rotate(int8_t power);
+	void open_close(int8_t power);
 
-    Motor m_axisY;
+    step_motor m_axisX;
+
+    step_motor m_axisY;
 
     int8_t m_valX;
 

@@ -5,12 +5,14 @@
 */
 
 // the setup function runs once when you press reset or power the board
-#include "rov_data_types/rov_data_types.hpp"
+#include "rov_data_types.hpp"
 #include "motor.h"
+#include "manipulator.hpp"
 rov_types::rov_hardware_control hc;
 
 motor v[4];
 motor h[4];
+rov::manipulator man;
 
 void setup() {
 	Serial.begin(115200);
@@ -25,6 +27,8 @@ void setup() {
 	v[2].set(2); v[2].init();
 	v[3].set(2); v[3].init();
 
+	man.init();
+	//Serial.println("inited");
 }
 
 bool updated = false;
@@ -36,6 +40,7 @@ void loop() {
 			v[i].write(hc.vertical_power[i]);
 			v[i].write(hc.horizontal_power[i]);
 		}
+		man.write(hc);
 		updated = false;
 	}
 	
