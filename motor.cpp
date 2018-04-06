@@ -4,6 +4,7 @@
 
 motor::motor(): m_pin(0)
 {
+  m_driver.writeMicroseconds(1500);
 }
 
 void motor::set(int pin)
