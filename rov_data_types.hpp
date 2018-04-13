@@ -42,7 +42,7 @@ namespace rov_types {
 
         int8_t horizontal_power[4];
         int8_t vertical_power[4];
-	int8_t manipulator_rotate = 0;
+		int8_t manipulator_rotate = 0;
         int8_t manipulator_open_close = 0;
     private:
         void data_serialize(binary_stream &bs)  final;

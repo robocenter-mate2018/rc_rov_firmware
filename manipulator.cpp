@@ -1,7 +1,9 @@
 #include "manipulator.hpp"
-
+#include "config.h"
 rov::manipulator::manipulator():
-	m_axisX(24,23), m_axisY(43,34), m_valX(0), m_valY(0)
+	m_axisX(config::manipulator::AXISX_PIN1, config::manipulator::AXISX_PIN2), 
+	m_axisY(config::manipulator::AXISY_PIN1, config::manipulator::AXISY_PIN2),
+	m_valX(0), m_valY(0)
 {
 }
 
@@ -11,10 +13,14 @@ void rov::manipulator::init()
 	m_axisY.init();
 }
 
-void rov::manipulator::write(const rov_types::rov_hardware_control & control)
+void rov::manipulator::run(const data_store & store)
 {
-	rotate(control.manipulator_rotate);
-	rotate(control.manipulator_open_close);
+	rotate(store.get_control().manipulator_rotate);
+	open_close(store.get_control().manipulator_open_close);
+}
+
+void rov::manipulator::commit(data_store &store)
+{
 }
 
 rov::manipulator::~manipulator()

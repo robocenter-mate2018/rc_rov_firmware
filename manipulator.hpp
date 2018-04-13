@@ -1,20 +1,20 @@
 #ifndef ROV_MANIPULATORPAYLOAD_H
 #define ROV_MANIPULATORPAYLOAD_H
 
-
 #include <stdint.h>
 #include "rov_data_types.hpp"
 #include "step_motor.h"
+#include "device.h"
 
 namespace rov {
 
-class manipulator {
+class manipulator : public device  {
   public:
     manipulator();
 
     virtual void init();
-
-    virtual void write(const  rov_types::rov_hardware_control& control);
+	virtual void run(const data_store &store);
+	virtual void commit(data_store &store);
 
     ~manipulator();
 
