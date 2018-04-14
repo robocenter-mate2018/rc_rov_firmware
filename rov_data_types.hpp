@@ -43,7 +43,7 @@ namespace rov_types {
 		int8_t camera_rotate[2] = { 0 }; //-1, 1
 		int8_t magnet = 0; //0 - close, 1 open
 		int8_t acoustic = 0; // -1 close, 0 no noise, 1 open
-		int8_t twisting_motors[4] = { 0 }; // крутилки -1 1 х4
+		int8_t twisting_motors[4] = { 0 }; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ -1 1 пїЅ4
 
 	private:
 		void data_serialize(binary_stream &bs) override final;
@@ -60,7 +60,7 @@ namespace rov_types {
 		int8_t camera_rotate[2] = { 0 }; //-1 bottom, 1 top, 0 stop
 		int8_t magnet = 0; //0 - close, 1 open
 		int8_t acoustic = 0; // -1 close, 0 no noise, 1 open
-		int8_t twisting_motors[4] = { 0 }; // крутилки -1 1 х4
+		int8_t twisting_motors[4] = { 0 }; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ -1 1 пїЅ4
 	private:
 		void data_serialize(binary_stream &bs) override final;
 

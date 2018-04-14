@@ -1,6 +1,7 @@
 #pragma once
 #include "data_store.h"
 #include "rc_rov.h"
+#include "timer.h"
 class mini_communicator : public device
 {
 public:
@@ -17,5 +18,6 @@ private:
 	rov_types::rov_mini_control m_last_control;
 	rov_types::rov_mini_telimetry m_last_telimetry;
 	bool m_updated;
+	timer m_timer;
 };
 

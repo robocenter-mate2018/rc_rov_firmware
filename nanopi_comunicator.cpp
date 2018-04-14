@@ -2,7 +2,7 @@
 #include "config.h"
 #include "serializable.hpp"
 #include "rc_rov.h"
-
+#include "timer.h"
 
 nanopi_comunicator::nanopi_comunicator() : m_updated(false)
 {
@@ -19,10 +19,17 @@ void nanopi_comunicator::init()
 
 void nanopi_comunicator::run(const data_store & store)
 {
-	uint8_t buffer[100];
-	rov_types::rov_hardware_telimetry t = store.get_telimetry();
-	uint8_t size = t.serialize(buffer);
-	//nanopi.write(buffer, size);
+	if (m_timer.elapsed() > 100) {
+		m_timer.stop();
+		uint8_t buffer[100];
+		rov_types::rov_hardware_telimetry t = store.get_telimetry();
+		uint8_t size = t.serialize(buffer);
+		nanopi.write(buffer, size);
+	}
+
+	if (!m_timer.is_started()) {
+		m_timer.start();
+	}
 }
 
 void nanopi_comunicator::commit(data_store &store)
@@ -40,7 +47,6 @@ void nanopi_comunicator::subscribe_on_serial(rc_rov * parrent)
 
 void nanopi_comunicator::on_serial_event()
 {
-	Serial.println("serial.on_serial_event()");
 	uint8_t packet[config::serial_buffer::size];
 	rov_types::rov_hardware_control hc;
 	size_t i = 0;

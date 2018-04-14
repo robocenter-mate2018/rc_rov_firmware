@@ -1,6 +1,7 @@
 #pragma once
 #include "device.h"
 #include "rov_data_types.hpp"
+#include "timer.h"
 class nanopi_comunicator : public device
 {
 public:
@@ -18,5 +19,6 @@ private:
 	rov_types::rov_hardware_control m_last_control;
 	rov_types::rov_hardware_telimetry m_last_telimetry;
 	bool m_updated;
+	timer m_timer;
 };
 
