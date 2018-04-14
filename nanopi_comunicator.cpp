@@ -19,7 +19,7 @@ void nanopi_comunicator::init()
 
 void nanopi_comunicator::run(const data_store & store)
 {
-	if (m_timer.elapsed() > 100) {
+	if (m_timer.elapsed() > 25) {
 		m_timer.stop();
 		uint8_t buffer[100];
 		rov_types::rov_hardware_telimetry t = store.get_telimetry();

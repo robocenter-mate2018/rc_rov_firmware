@@ -27,7 +27,9 @@ void depth_sensor::run(const data_store & store)
 
 void depth_sensor::commit(data_store &store)
 {
-	store.get_telimetry().depth = m_sensor.depth();
+	if (m_sensor.depth() > 100) {
+		store.get_telimetry().depth = m_sensor.depth();
+	}
 }
 
 void depth_sensor::subscribe_on_serial(rc_rov * parrent)

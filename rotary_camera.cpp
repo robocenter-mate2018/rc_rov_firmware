@@ -36,6 +36,7 @@ void rotary_camera::init()
 void rotary_camera::run(const data_store & store)
 {
 	for (int i = 0; i < CAMERAS_SIZE; i++) {
+		m_last_val[i] = store.get_control().camera_rotate[i];
 		rotate_cam(m_cameras[i], store.get_control().camera_rotate[i]);
 	}
 	
