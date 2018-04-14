@@ -6,7 +6,7 @@ namespace config {
 SERIAL SUBSCRIBER IDX CONFIG
 */
 	struct serial_subcriber {
-		enum : uint32_t {
+		enum : uint8_t {
 			serial = 0,
 			serial1 = 1,
 			serial2 = 2,
@@ -20,19 +20,20 @@ SERIAL SUBSCRIBER IDX CONFIG
 
 #define SUBSYSTEM_PAYLOAD_ENABLED
 #define SUBSYSTEM_THRUSTER_ENABLED
-//#define SUBSYSTEM_SENSORS_ENABLED
+#define SUBSYSTEM_SENSORS_ENABLED
 #define SUBSYSTEM_COMMUNICATOR_ENABLED
 
-#define SUBSYSTEM_SIZE 1
+#define SUBSYSTEM_SIZE 4
 
 /*
 COMMUNICATOR CONFIG
 */
 
 #define COMMUNICATOR_NANOPI_ENABLED
-#define COMMUNICATOR_SIZE (1)
+#define COMMUNICATOR_MINI_ENABLED
+#define COMMUNICATOR_SIZE (2)
 #define nanopi Serial
-#define mini_payload Serial2
+#define mini_payload Serial3
 
 
 struct communicator_baudrate {
@@ -90,7 +91,7 @@ struct VerticalThrusterConfig {
 #define PAYLOAD_MANIPULATOR_ENABLED 
 #define PAYLOAD_ROTARYCAMERA_ENABLED 
 
-#define PAYLOAD_SIZE 1
+#define PAYLOAD_SIZE 2
 
 
 	struct manipulator {
@@ -128,7 +129,7 @@ struct VerticalThrusterConfig {
 SENSOR CONFIG
 */
 
-//#define SENSOR_DEPTH_ENABLED 
+#define SENSOR_DEPTH_ENABLED 
 
 
 #define SENSOR_SIZE 1

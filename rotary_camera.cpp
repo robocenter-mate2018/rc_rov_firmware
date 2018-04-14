@@ -2,13 +2,18 @@
 #include "config.h"
 
 
-rotary_camera::rotary_camera()
+rotary_camera::rotary_camera() 
 {
+	m_last_val[0] = 0;
+	m_last_val[1] = 0;
 }
 
 
 rotary_camera::~rotary_camera()
 {
+	for (int i = 0; i < 2; i++) {
+		m_cameras[i].cam.detach();
+	}
 }
 
 void rotary_camera::init()
@@ -22,6 +27,7 @@ void rotary_camera::init()
 	m_cameras[1].angle = config::cameras::back::DEFAULT_ANGLE;
 	m_cameras[1].min_angle = config::cameras::back::MIN_ANGLE;
 	m_cameras[1].min_angle = config::cameras::back::MAX_ANGLE;
+
 	for (int i = 0; i < CAMERAS_SIZE; i++) {
 		m_cameras[i].cam.write(m_cameras[i].angle);
 	}
@@ -30,13 +36,16 @@ void rotary_camera::init()
 void rotary_camera::run(const data_store & store)
 {
 	for (int i = 0; i < CAMERAS_SIZE; i++) {
-		/*rotate_cam(m_cameras[i], store.get_telimetry().rr)
-		m_cameras[i].cam.write(m_cameras[i].angle);*/
+		rotate_cam(m_cameras[i], store.get_control().camera_rotate[i]);
 	}
+	
 }
 
 void rotary_camera::commit(data_store & store)
 {
+	for (int i = 0; i < 2; i++) {
+		store.get_telimetry().camera_rotate[i] = m_last_val[i];
+	}
 }
 
 void rotary_camera::rotate_cam(rot_cam & cam_, int8_t val) {

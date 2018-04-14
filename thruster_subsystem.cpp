@@ -9,6 +9,7 @@ thruster_subsystem::thruster_subsystem()
 	m_motors[i++].set(config::thrusters::horizontal::pins::FRONT_RIGHT_PIN);
 	m_motors[i++].set(config::thrusters::horizontal::pins::BACK_LEFT_PIN);
 	m_motors[i++].set(config::thrusters::horizontal::pins::BACK_RIGHT_PIN);
+
 	m_motors[i++].set(config::thrusters::veritacal::pins::FRONT_LEFT_PIN);
 	m_motors[i++].set(config::thrusters::veritacal::pins::FRONT_RIGHT_PIN);
 	m_motors[i++].set(config::thrusters::veritacal::pins::BACK_LEFT_PIN);

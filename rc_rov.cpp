@@ -4,7 +4,7 @@
 #include "payload_subsystem.h"
 #include "communicator_subsystem.h"
 #include "thruster_subsystem.h"
-
+#include "sensor_subsystem.h"
 rc_rov::rc_rov()
 {
 	int i = 0;
@@ -18,7 +18,7 @@ rc_rov::rc_rov()
 	m_subsystems[i++] = new thruster_subsystem();
 #endif
 #ifdef SUBSYSTEM_SENSORS_ENABLED 
-	m_subsystems[i++] = new sensors_subsystem();
+	m_subsystems[i++] = new sensor_subsystem();
 #endif
 }
 

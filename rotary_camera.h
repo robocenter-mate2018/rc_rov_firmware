@@ -22,7 +22,7 @@ private:
 	};
 	
 	rot_cam m_cameras[CAMERAS_SIZE];
-
+	int8_t m_last_val[2];
 	void rotate_cam(rot_cam &cam_, int8_t val);
 	
 };

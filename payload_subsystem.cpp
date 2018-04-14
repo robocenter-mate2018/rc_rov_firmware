@@ -1,6 +1,6 @@
 #include "payload_subsystem.h"
 #include "manipulator.hpp"
-
+#include "rotary_camera.h"
 
 payload_subsystem::payload_subsystem()
 {
@@ -10,7 +10,7 @@ payload_subsystem::payload_subsystem()
 #endif // !MANIPULATOR_ENABLED
 
 #ifdef PAYLOAD_ROTARYCAMERA_ENABLED
-	m_payload_tools[i++] = new rov::rotary_camera();
+	m_payload_tools[i++] = new rotary_camera();
 #endif // !MANIPULATOR_ENABLED
 #ifdef PAYLOAD_ESP8266_ENABLED
 	m_payload_tools[i++] = new rov::ESP8266();

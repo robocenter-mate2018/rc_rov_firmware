@@ -1,12 +1,11 @@
 #pragma once
-#include "device.h"
-#include "rov_data_types.hpp"
-class nanopi_comunicator : public device
+#include "data_store.h"
+#include "rc_rov.h"
+class mini_communicator : public device
 {
 public:
-	nanopi_comunicator();
-	~nanopi_comunicator();
-
+	mini_communicator();
+	~mini_communicator();
 	virtual void init();
 	virtual void run(const data_store &store);
 	virtual void commit(data_store &store);
@@ -15,8 +14,8 @@ public:
 
 	virtual void on_serial_event();
 private:
-	rov_types::rov_hardware_control m_last_control;
-	rov_types::rov_hardware_telimetry m_last_telimetry;
+	rov_types::rov_mini_control m_last_control;
+	rov_types::rov_mini_telimetry m_last_telimetry;
 	bool m_updated;
 };
 

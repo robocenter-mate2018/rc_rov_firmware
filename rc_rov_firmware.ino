@@ -5,7 +5,7 @@
 */
 
 #include "rc_rov.h"
-
+#include "timer.h"
 rc_rov robot;
 
 void setup() {
@@ -13,7 +13,11 @@ void setup() {
 }
 
 void loop() {
+	timer t;
+	t.start();
 	robot.loop();
+	//Serial.print("time loop ");
+	//Serial.println(t.elapsed());
 }
 
 void serialEvent() {

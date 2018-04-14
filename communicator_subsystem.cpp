@@ -2,15 +2,16 @@
 #include "config.h"
 #include "rov_data_types.hpp"
 #include "nanopi_comunicator.h"
+#include "mini_communicator.h"
 
 communicator_subsystem::communicator_subsystem()
 {
 	int i = 0;
 #ifdef COMMUNICATOR_NANOPI_ENABLED
-	m_communicator[i] = new nanopi_comunicator();
+	m_communicator[i++] = new nanopi_comunicator();
 #endif
 #ifdef COMMUNICATOR_MINI_ENABLED
-	m_communicator[i] = new mini_comunicator();
+	m_communicator[i++] = new mini_communicator();
 #endif
 }
 

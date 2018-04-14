@@ -1,6 +1,6 @@
 #include "sensor_subsystem.h"
 
-
+#include "depth_sensor.h"
 
 sensor_subsystem::sensor_subsystem()
 {

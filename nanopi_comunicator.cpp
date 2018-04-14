@@ -14,12 +14,15 @@ nanopi_comunicator::~nanopi_comunicator()
 
 void nanopi_comunicator::init()
 {
-	nanopi.begin(config::communicator_baudrate::SERIAL_BAUDRATE);
+	nanopi.begin(115200);
 }
 
 void nanopi_comunicator::run(const data_store & store)
 {
-	//TODO: make send to nanopi hardware telimetry
+	uint8_t buffer[100];
+	rov_types::rov_hardware_telimetry t = store.get_telimetry();
+	uint8_t size = t.serialize(buffer);
+	//nanopi.write(buffer, size);
 }
 
 void nanopi_comunicator::commit(data_store &store)
@@ -37,6 +40,7 @@ void nanopi_comunicator::subscribe_on_serial(rc_rov * parrent)
 
 void nanopi_comunicator::on_serial_event()
 {
+	Serial.println("serial.on_serial_event()");
 	uint8_t packet[config::serial_buffer::size];
 	rov_types::rov_hardware_control hc;
 	size_t i = 0;

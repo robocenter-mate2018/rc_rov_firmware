@@ -90,12 +90,12 @@
     <ClInclude Include="rotary_camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="mini_communicator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="motor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="base_packet_t.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="binary_stream.cpp">
@@ -153,6 +153,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rotary_camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mini_communicator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
