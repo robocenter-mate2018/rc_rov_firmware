@@ -34,6 +34,7 @@ void nanopi_comunicator::run(const data_store & store)
 
 void nanopi_comunicator::commit(data_store &store)
 {
+	store.get_telimetry().mega_communication = 1;
 	if (m_updated) {
 		store.set_control(m_last_control);
 		m_updated = false;

@@ -2,6 +2,7 @@
 #include "data_store.h"
 #include "rc_rov.h"
 #include "timer.h"
+
 class mini_communicator : public device
 {
 public:

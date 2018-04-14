@@ -21,6 +21,8 @@ void rov::manipulator::run(const data_store & store)
 
 void rov::manipulator::commit(data_store &store)
 {
+	store.get_telimetry().manipulator_opened_closed = m_valY;
+	store.get_telimetry().manipulator_rotated = m_valX;
 }
 
 rov::manipulator::~manipulator()
