@@ -31,10 +31,20 @@ COMMUNICATOR CONFIG
 
 #define COMMUNICATOR_NANOPI_ENABLED
 #define COMMUNICATOR_MINI_ENABLED
-#define COMMUNICATOR_SIZE (2)
-#define nanopi Serial
-#define mini_payload Serial3
+#define COMMUNICATOR_ESP
+#define COMMUNICATOR_SIZE (3)
 
+#define nanopi Serial
+#define nanopi_serial_number (0)
+#define nanopi_boudrate (115200)
+
+#define mini_payload Serial2
+#define mini_serial_number (2)
+#define mini_boudrate (115200)
+
+#define esp Serial3
+#define esp_serial_number (3)
+#define esp_boudrate (115200)
 
 struct communicator_baudrate {
 	enum : uint32_t {
@@ -69,21 +79,15 @@ struct thrusters {
 	struct veritacal {
 		struct pins {
 			enum : int {
-				FRONT_LEFT_PIN = 2,
-				FRONT_RIGHT_PIN = 3,
-				BACK_LEFT_PIN = 4,
-				BACK_RIGHT_PIN = 5
+				FRONT_LEFT_PIN = 6,
+				FRONT_RIGHT_PIN = 7,
+				BACK_LEFT_PIN = 8,
+				BACK_RIGHT_PIN = 9
 			};
 		};
 	};
 };
 
-struct VerticalThrusterConfig {
-	enum : int {
-		FRONT_PIN = 6,
-		BACK_PIN = 7
-	};
-};
 
 /*
 	PAYLOAD CONFIG
