@@ -3,7 +3,7 @@
 #include "rov_data_types.hpp"
 #include "nanopi_comunicator.h"
 #include "mini_communicator.h"
-
+#include "esp8266.h"
 communicator_subsystem::communicator_subsystem()
 {
 	int i = 0;
@@ -12,6 +12,9 @@ communicator_subsystem::communicator_subsystem()
 #endif
 #ifdef COMMUNICATOR_MINI_ENABLED
 	m_communicator[i++] = new mini_communicator();
+#endif
+#ifdef COMMUNICATOR_ESP
+	m_communicator[i++] = new esp8266();
 #endif
 }
 
