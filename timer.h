@@ -8,6 +8,7 @@ public:
 	void start();
 	bool is_started();
 	void stop();
+	void restart();
 	unsigned long elapsed();
 private:
 	unsigned long m_time;

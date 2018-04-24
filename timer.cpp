@@ -27,6 +27,12 @@ void timer::stop()
 	m_is_started = false;
 }
 
+void timer::restart()
+{
+	stop();
+	start();
+}
+
 unsigned long timer::elapsed()
 {
 	return m_is_started ? (millis() - m_time) : 0;
