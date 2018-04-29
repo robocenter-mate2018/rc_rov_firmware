@@ -10,12 +10,14 @@ rc_rov robot;
 
 void setup() {
 	robot.init();
+	delay(10000);
 }
 
 void loop() {
 	//timer t;
 	//t.start();
 	robot.loop();
+//	delay(1000);
 	//Serial.print("time loop ");
 	//Serial.println(t.elapsed());
 }
