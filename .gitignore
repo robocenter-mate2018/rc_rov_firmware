@@ -216,3 +216,5 @@ pip-log.txt
 .mr.developer.cfg
 __vm/*
 Debug/*
+rc_rov_firmware.ino.mega.hex
+*.hex
