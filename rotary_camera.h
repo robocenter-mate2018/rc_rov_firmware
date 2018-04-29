@@ -2,7 +2,7 @@
 #include "device.h"
 #include <Servo.h>
 #include "config.h"
-
+#include "timer.h"
 class rotary_camera : public device
 {
 public:
@@ -19,6 +19,8 @@ private:
 		int angle = 0;
 		int max_angle = 0;
 		int min_angle = 0;
+		timer time;
+		bool updated = false;
 	};
 	
 	rot_cam m_cameras[CAMERAS_SIZE];
