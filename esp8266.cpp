@@ -26,8 +26,11 @@ void esp8266::commit(data_store & store)
 {
 	if (m_obs_data_updated) {
 		//save to store
+		
 		m_obs_data_updated = false;
 	}
+	store.get_telimetry().esp_state = m_state;
+	store.get_telimetry().esp_communication = m_communication;
 }
 
 void esp8266::subscribe_on_serial(rc_rov * parrent)
@@ -40,7 +43,7 @@ void esp8266::on_serial_event()
 	while (esp.available()) {
 		m_last_response += esp.readString();
 	}
-
+	m_communication++;
 	m_response_recvieved = replay_check(m_last_response, m_state);
 	should_step();
 }

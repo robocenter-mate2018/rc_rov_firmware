@@ -30,6 +30,7 @@ private:
 	bool m_response_recvieved;
 	bool m_obs_data_updated = false;
 	uint8_t m_state = 0;
+	uint8_t m_communication = 0;
 
 
 
