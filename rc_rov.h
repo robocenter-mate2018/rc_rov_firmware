@@ -2,7 +2,8 @@
 #include "data_store.h"
 #include "subsystem.h"
 #include "config.h"
-
+#include "timer.h"
+#include "led_strip.h"
 class device;
 class rc_rov {
 public:
@@ -19,7 +20,7 @@ public:
 private:
 	data_store m_data_store;
 	subsystem *m_subsystems[SUBSYSTEM_SIZE];
-
 	device *m_subscriber_event[4];
+	led_strip m_led;
 };
 

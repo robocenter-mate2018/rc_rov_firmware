@@ -5,6 +5,9 @@
 #include "communicator_subsystem.h"
 #include "thruster_subsystem.h"
 #include "sensor_subsystem.h"
+
+
+
 rc_rov::rc_rov()
 {
 	int i = 0;
@@ -35,6 +38,7 @@ void rc_rov::init()
 		m_subsystems[i]->init();
 		m_subsystems[i]->register_on_serial(this);
 	}
+	
 }
 
 void rc_rov::loop()
@@ -43,6 +47,7 @@ void rc_rov::loop()
 		m_subsystems[i]->run(m_data_store);
 		m_subsystems[i]->commit(m_data_store);
 	}
+	m_led.loop();
 }
 
 void rc_rov::interrupt_serial(uint8_t idx)
