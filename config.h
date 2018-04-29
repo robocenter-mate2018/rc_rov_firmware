@@ -69,20 +69,20 @@ struct thrusters {
 	struct horizontal {
 		struct pins {
 			enum : int {
-				FRONT_LEFT_PIN = 2,
-				FRONT_RIGHT_PIN = 3,
-				BACK_LEFT_PIN = 4,
-				BACK_RIGHT_PIN = 5
+				FRONT_LEFT_PIN = 6,
+				FRONT_RIGHT_PIN = 2,
+				BACK_LEFT_PIN = 9,
+				BACK_RIGHT_PIN = 7
 			};
 		};
 	};
 	struct veritacal {
 		struct pins {
 			enum : int {
-				FRONT_LEFT_PIN = 6,
-				FRONT_RIGHT_PIN = 7,
+				FRONT_LEFT_PIN = 5,
+				FRONT_RIGHT_PIN = 3,
 				BACK_LEFT_PIN = 8,
-				BACK_RIGHT_PIN = 9
+				BACK_RIGHT_PIN = 4				
 			};
 		};
 	};
@@ -95,15 +95,16 @@ struct thrusters {
 #define PAYLOAD_MANIPULATOR_ENABLED 
 #define PAYLOAD_ROTARYCAMERA_ENABLED 
 
+
 #define PAYLOAD_SIZE 2
 
 
 	struct manipulator {
 		enum : uint8_t {
-			AXISX_PIN1 = 33,
-			AXISX_PIN2 = 31,
-			AXISY_PIN1 = 29,
-			AXISY_PIN2 = 27
+			AXISX_PIN1 = 24,
+			AXISX_PIN2 = 25,
+			AXISY_PIN1 = 23,
+			AXISY_PIN2 = 26
 		};
 	};
 
@@ -112,7 +113,7 @@ struct thrusters {
 	struct cameras {
 		struct front {
 			enum : uint8_t {
-				pin = 40,
+				pin = 28,
 			};
 			static constexpr int  DEFAULT_ANGLE = 90;
 			static constexpr int  MIN_ANGLE = 0;
@@ -120,7 +121,7 @@ struct thrusters {
 		};
 		struct back {
 			enum : uint8_t {
-				pin = 41,
+				pin = 29,
 			};
 			static constexpr int  DEFAULT_ANGLE = 90;
 			static constexpr int  MIN_ANGLE = 0;
