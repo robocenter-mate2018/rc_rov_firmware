@@ -16,5 +16,6 @@ public:
 	virtual void on_serial_event();
 private:
 	rovlibs::MS5837 m_sensor;
+	float m_depth;
 };
 
