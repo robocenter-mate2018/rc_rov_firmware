@@ -6,6 +6,7 @@
 
 nanopi_comunicator::nanopi_comunicator() : m_updated(false), m_feedback(0)
 {
+	
 }
 
 nanopi_comunicator::~nanopi_comunicator()
@@ -15,16 +16,23 @@ nanopi_comunicator::~nanopi_comunicator()
 void nanopi_comunicator::init()
 {
 	nanopi.begin(115200);
+	//m_timer.start();
+
 }
 
 void nanopi_comunicator::run(const data_store & store)
 {
-	if (m_timer.elapsed() > 25) {
+	if(m_timer.elapsed() > 50) {
+		m_timer.stop();
 		m_timer.restart();
 		uint8_t buffer[100];
 		rov_types::rov_hardware_telimetry t = store.get_telimetry();
 		uint8_t size = t.serialize(buffer);
 		nanopi.write(buffer, size);
+	}
+
+	if (!m_timer.is_started()) {
+		m_timer.start();
 	}
 }
 
@@ -48,7 +56,7 @@ void nanopi_comunicator::on_serial_event()
 	uint8_t packet[config::serial_buffer::size];
 	rov_types::rov_hardware_control hc;
 	size_t i = 0;
-	delay(1);
+	delay(3);
 
 	while (nanopi.available()) {
 		packet[i++] = nanopi.read();

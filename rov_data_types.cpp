@@ -97,6 +97,7 @@ void rov_types::rov_hardware_control::data_serialize(rov_types::binary_stream &b
     for(const auto & b : twisting_motors) {
         bs << b;
     }
+	bs << sencondary_manipulator;
 }
 
 void rov_types::rov_hardware_control::data_deserialize(rov_types::binary_stream &bs) {
@@ -117,6 +118,7 @@ void rov_types::rov_hardware_control::data_deserialize(rov_types::binary_stream 
     for(auto & b : twisting_motors) {
         bs >> b;
     }
+	bs >> sencondary_manipulator;
 }
 
 

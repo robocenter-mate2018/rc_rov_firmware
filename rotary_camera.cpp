@@ -42,9 +42,10 @@ void rotary_camera::run(const data_store & store)
 			rotate_cam(m_cameras[i], m_last_val[i]);
 			m_cameras[i].updated = true;
 		}
-		if (m_cameras[i].time.elapsed() > 50 || m_cameras[i].updated) {
+		if (m_cameras[i].time.elapsed() > 30 || m_cameras[i].updated) {
 			rotate_cam(m_cameras[i], m_last_val[i]);
 			m_cameras[i].updated = false;
+			m_cameras[i].time.restart();
 		}
 	}
 	

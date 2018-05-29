@@ -16,6 +16,7 @@ public:
 	virtual void subscribe_on_serial(rc_rov *parrent);
 
 	virtual void on_serial_event();
+
 private:
 	void send_request(String request);
 	void next(bool flag);

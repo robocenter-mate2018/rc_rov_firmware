@@ -28,7 +28,7 @@ void mini_communicator::run(const data_store & store)
 
 		t.acoustics = control.acoustic;
 		t.magnet = control.magnet;
-
+		t.manipulator = control.sencondary_manipulator;
 		for (int i = 0; i < 4; i++) {
 			t.twisting_motors[i] = control.twisting_motors[i];
 		}
@@ -43,6 +43,7 @@ void mini_communicator::commit(data_store & store)
 {
 	store.get_telimetry().acoustic = this->m_last_telimetry.acoustics;
 	store.get_telimetry().magnet = this->m_last_telimetry.magnet;
+	this->m_last_telimetry.mini_communicator_feedback = -1;
 	store.get_telimetry().mini_communication = this->m_last_telimetry.mini_communicator_feedback;
 	
 	for (int i = 0; i < 4; i++) {
@@ -52,7 +53,7 @@ void mini_communicator::commit(data_store & store)
 
 void mini_communicator::subscribe_on_serial(rc_rov * parrent)
 {
-	parrent->register_serial(config::serial_subcriber::serial2, this);
+	parrent->register_serial(mini_serial_number, this);
 }
 
 void mini_communicator::on_serial_event()
@@ -61,6 +62,7 @@ void mini_communicator::on_serial_event()
 	rov_types::rov_mini_telimetry hc;
 	size_t i = 0;
 	delay(1);
+	this->m_last_telimetry.mini_communicator_feedback = 100;
 	while (mini_payload.available()) {
 		packet[i++] = mini_payload.read();
 	}
@@ -68,6 +70,7 @@ void mini_communicator::on_serial_event()
 	auto e = hc.deserialize(packet, i);
 
 	if (rov_types::serializable::check_for_success(e)) {
+		this->m_last_telimetry.mini_communicator_feedback = 1;
 		m_last_telimetry = hc;
 		m_updated = true;
 	}

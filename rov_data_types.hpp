@@ -52,7 +52,7 @@ namespace rov_types {
 	};
 
 
-	struct rov_hardware_control : public base_packet_t<0x1A, 19, 21> {
+	struct rov_hardware_control : public base_packet_t<0x1A, 20, 22> {
 		int8_t horizontal_power[4] = { 0 }; //-100, 100 x 4
 		int8_t vertical_power[4] = { 0 }; //-100, 100 x 4
 		int8_t manipulator_rotate = 0; //-1 left, 1 right, 0 stop
@@ -61,6 +61,7 @@ namespace rov_types {
 		int8_t magnet = 0; //0 - close, 1 open
 		int8_t acoustic = 0; // -1 close, 0 no noise, 1 open
 		int8_t twisting_motors[4] = { 0 }; // �������� -1 1 �4
+		int8_t sencondary_manipulator = 0;
 	private:
 		void data_serialize(binary_stream &bs) override final;
 

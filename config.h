@@ -38,12 +38,12 @@ COMMUNICATOR CONFIG
 #define nanopi_serial_number (0)
 #define nanopi_boudrate (115200)
 
-#define mini_payload Serial2
-#define mini_serial_number (2)
+#define mini_payload Serial1
+#define mini_serial_number (1)
 #define mini_boudrate (115200)
 
-#define esp Serial3
-#define esp_serial_number (3)
+#define esp Serial2
+#define esp_serial_number (2)
 #define esp_boudrate (115200)
 
 struct communicator_baudrate {
@@ -94,7 +94,6 @@ struct thrusters {
 */
 #define PAYLOAD_MANIPULATOR_ENABLED 
 #define PAYLOAD_ROTARYCAMERA_ENABLED 
-
 
 #define PAYLOAD_SIZE 2
 
